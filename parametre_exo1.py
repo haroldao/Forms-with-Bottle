@@ -1,17 +1,28 @@
 import bottle
 
+#### Index
 @bottle.route('/')
 def index():
   nom = bottle.request.query.nom
   prenom = bottle.request.query.prenom
-#   return """
-# <h1> Hi </h1>
-# <p> First Page. </p>
-# """
-  # return bottle.template(
-  #   'Hi {{nom}} {{prenom}}'
-  #   , nom=nom, prenom=prenom)
+  #Age
+  age =bottle.request.query.age
+  #Bin Age
+  age_2 = bin(int(bottle.request.query.age))
+  age_bin = age_2.replace("0b","")
 
-  return bottle.template("exo1.html", nom=nom, prenom=prenom)
+  # Render
+  return bottle.template("exo1.html", 
+    nom = nom,
+    prenom = prenom,
+    age = age,
+    age_bin = age_bin
+  )
 
+#### Page2
+@bottle.route('/page2')
+def page2():
+  return "test"
+
+# Run
 bottle.run(host='0.0.0.0', port=8080, debug=True, reloader=True)
